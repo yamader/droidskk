@@ -1,3 +1,5 @@
+import java.util.*
+
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.android)
@@ -18,13 +20,26 @@ android {
     vectorDrawables.useSupportLibrary = true
   }
 
+  signingConfigs {
+    val keyPropsFile = rootProject.file("key.properties")
+    val keyProps = Properties().apply {
+      keyPropsFile.inputStream().use { load(it) }
+    }
+
+    create("release") {
+      storeFile = file(keyProps["storeFile"] as String)
+      storePassword = keyProps["storePassword"] as String
+      keyAlias = keyProps["keyAlias"] as String
+      keyPassword = keyProps["storePassword"] as String
+    }
+  }
+
   buildTypes {
     release {
       isMinifyEnabled = true
       isShrinkResources = true
-      proguardFiles(
-        getDefaultProguardFile("proguard-android-optimize.txt")
-      )
+      proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"))
+      signingConfig = signingConfigs.getByName("release")
     }
   }
 
@@ -35,6 +50,12 @@ android {
   composeOptions {
     kotlinCompilerExtensionVersion = libs.versions.compose.get()
   }
+
+  kotlinOptions {
+    freeCompilerArgs += listOf(
+      "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
+    )
+  }
 }
 
 dependencies {
@@ -44,6 +65,7 @@ dependencies {
   implementation(libs.androidx.compose.ui)
   implementation(libs.androidx.compose.ui.tooling.preview)
   implementation(libs.androidx.compose.material3)
+  implementation(libs.androidx.datastore)
 
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.test.ext.junit)

@@ -27,6 +27,7 @@ dependencyResolutionManagement {
       library("androidx-compose-ui", "androidx.compose.ui", "ui").versionRef("compose")
       library("androidx-compose-ui-tooling-preview", "androidx.compose.ui", "ui-tooling-preview").versionRef("compose")
       library("androidx-compose-material3", "androidx.compose.material3:material3:1.0.1")
+      library("androidx-datastore", "androidx.datastore:datastore-preferences:1.0.0")
 
       library("junit", "junit:junit:4.13.2")
       library("androidx-test-ext-junit", "androidx.test.ext:junit:1.1.5")
