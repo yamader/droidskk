@@ -8,6 +8,8 @@ import net.dyama.droidskk.ui.settings.Settings
 class SettingsActivity: ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContent { Settings() }
+    setContent {
+      Settings()
+    }
   }
 }

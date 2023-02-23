@@ -1,4 +1,5 @@
 <resources>
-  <string name="ime_name">DroidSKK</string>
-  <string name="ime_settings">DroidSKK 設定</string>
+  <!-- settings -->
+  <string name="settings_title">DroidSKK 設定</string>
+  <string name="settings_testing_field">お試しフィールド</string>
 </resources>
